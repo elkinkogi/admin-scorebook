@@ -1,1 +1,16 @@
-<p>This is the listLeague view.</p>
+<table class="table-list-league">
+    <tr>
+        <th>League Name</th>
+        <th>Number of Teams</th>
+        <th>League Coordinator</th>
+        <th>Games Played</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="value in listLeagues">
+        <td>{{ value.league_name }}</td>
+        <td>{{ value.number }}</td>
+        <td>{{ value.league_coor }}</td>
+        <td>{{ value.game_played }}</td>
+        <td><i class="fa fa-pencil"></i> / Del</td>
+    </tr>
+</table>

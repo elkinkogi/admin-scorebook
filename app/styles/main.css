@@ -1,9 +1,21 @@
 *{
     padding: 0;
     margin: 0;
-    font-size: 13px;
 }
 
+a{
+    color: black;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+}
+
+header > div{
+    
+    padding: 0 10px;
+}
 
 .hiddene {
   visibility: hidden;  
@@ -57,4 +69,29 @@
     color: white;
     border-radius: 5px;
     padding: 5px;
+}
+
+.table-list-league{
+    margin: auto;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.table-list-league, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+.table-list-league tr:nth-child(even) {
+    background-color: #eee;
+}
+.table-list-league tr:nth-child(odd) {
+   background-color:#fff;
+}
+.table-list-league th	{
+    background-color: black;
+    color: white;
 }

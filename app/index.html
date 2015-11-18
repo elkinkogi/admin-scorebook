@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -22,7 +23,13 @@
 
     <!-- Add your site or application content here -->
    <header class="hiddene" ng-class="{visiblee: header}">
-
+       <div>
+           <h3><a ng-href="#/{{ dataHeader.pathLeft">{{ dataHeader.leftHeader }}</a></h3>
+           <div ng-click="logOut()">Log Out</div>
+       </div>
+       <div>
+           <h3><a ng-href="#/{{ dataHeader.pathRight }}">{{ dataHeader.rightHeader }}</a></h3>
+       </div>
     </header> 
 
     <div class="container">
