@@ -1,0 +1,60 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+}
+
+
+.hiddene {
+  visibility: hidden;  
+}
+
+.visiblee {
+       background: gray; 
+    height: 80px;
+  visibility: visible;
+}
+
+.section-login{
+    
+    width: 100%;
+    text-align: center;
+    margin-top: 20%;
+}
+
+.section-login > form > div{
+    width: 380px;
+    margin: auto;
+    padding: 7px; 
+
+}
+
+.section-login > form > .inputs{
+        display: flex;
+    justify-content: flex-end
+}
+
+.inputs > label{
+    flex: 1;
+    text-align: left
+}
+
+
+.input-login{
+    border: 2px solid gray;
+    width: 60%;
+    padding: 5px;
+    margin: auto
+}
+
+
+.button_default{
+    display: block;
+    margin: auto;
+    width: 65%;
+    border: none;
+    background: gray;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}

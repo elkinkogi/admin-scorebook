@@ -1,0 +1,22 @@
+<section class="section-login">
+    <form>
+        <div class="inputs">
+           <label for="email">
+               Email
+           </label>
+            <input placeholder="email" ng-model="email" required type="email" name="email" id="email" class="input-login">
+        </div>
+        <div class="inputs">
+           <label>
+               Password
+           </label>
+            <input placeholder="Password" ng-model="password" required type="password" name="password" class="input-login">
+        </div>
+        <div>
+            <button type="submit" ng-click="submitForm()" class="button_default">Login</button>
+        </div>
+        <div>
+            Forget your password?
+        </div>
+    </form>
+</section>
