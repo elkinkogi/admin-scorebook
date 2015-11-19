@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'picardy.fontawesome'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -39,6 +40,11 @@ angular
         controller: 'ListleagueCtrl',
         controllerAs: 'listLeague'
       })
+      .when('/createLeague', {
+        templateUrl: 'views/createleague.html',
+        controller: 'CreateleagueCtrl',
+        controllerAs: 'createLeague'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -46,10 +52,6 @@ angular
     .run(function($rootScope,SessionService,$location, $http){
     
              $rootScope.header = false;
-    
-            if(SessionService.get('isLogged')){
-               $location.path('/listLeague'); 
-            }
             
 
 });

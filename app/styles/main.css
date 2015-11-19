@@ -10,11 +10,26 @@ a{
 header{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 40px;
 }
 
 header > div{
     
     padding: 0 10px;
+}
+
+select{
+    width: 60% !important;
+    height: 40px !important;
+}
+
+input{
+    width: 60% !important;
+    height: 50px !important; 
+}
+
+.state{
+    width: 90px !important;
 }
 
 .hiddene {
@@ -27,11 +42,27 @@ header > div{
   visibility: visible;
 }
 
+.leftH {
+  display: none;  
+}
+
+.leftV {
+  display: block !important;
+}
+
+.header_textH {
+  display: none;  
+}
+
+.header_textV {
+  display: block !important;
+}
+
 .section-login{
     
     width: 100%;
     text-align: center;
-    margin-top: 20%;
+    margin-top: 10%;
 }
 
 .section-login > form > div{
@@ -71,27 +102,77 @@ header > div{
     padding: 5px;
 }
 
-.table-list-league{
+.list-league{
     margin: auto;
     width: 100%;
     margin-top: 10px;
 }
 
-.table-list-league, th, td {
+.list-league, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
 th, td {
     padding: 5px;
-    text-align: left;
+    text-align: center;
 }
-.table-list-league tr:nth-child(even) {
+.list-league tr:nth-child(even) {
     background-color: #eee;
 }
-.table-list-league tr:nth-child(odd) {
+.list-league tr:nth-child(odd) {
    background-color:#fff;
 }
-.table-list-league th	{
+.list-league th	{
     background-color: black;
     color: white;
 }
+
+.content-create div div{
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+}
+
+#box-color-1{
+    width: 70px;
+    height: 30px;
+    color: #FFF;
+}
+
+#box-color-2{
+    width: 70px;
+    height: 30px;
+    color: #FFF;
+}
+
+.form-control{
+    height: 50px !important;
+}
+
+.btn-primary{
+    background-color: gray !important;
+    border-color: gray !important;
+    height: 50px;
+    line-height: 35px;
+}
+
+.input-group{
+    width: 200px;
+    right: 40px;
+}
+
+.submit-league{
+    text-align: center;
+}
+
+.cont-location{
+    width: 61%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.location-league{
+    width: 100% !important;
+}
+
+

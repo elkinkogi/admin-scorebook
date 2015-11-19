@@ -5,10 +5,12 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -23,8 +25,9 @@
     <!-- Add your site or application content here -->
    <header class="hiddene" ng-class="{visiblee: header}">
        <div>
-           <h3><a ng-href="#/{{ dataHeader.pathLeft">{{ dataHeader.leftHeader }}</a></h3>
-           <div ng-click="logOut()">Log Out</div>
+           <h3 class="header_textH" ng-class="{header_textV: header_text}">Home</h3>
+           <h3 class="leftH" ng-class="{leftV: headerLeft}"><a ng-href="#/{{ dataHeader.pathLeft }}"><i class="fa fa-arrow-left"></i> &ensp; {{ dataHeader.leftHeader }}</a></h3>
+           <div class="header_textH" ng-class="{header_textV: header_text}" ng-click="logOut()">Log Out</div>
        </div>
        <div>
            <h3><a ng-href="#/{{ dataHeader.pathRight }}">{{ dataHeader.rightHeader }}</a></h3>
@@ -58,6 +61,9 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+    <script src="bower_components/angular-fontawesome/dist/angular-fontawesome.js"></script>
+    <script src="bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -68,6 +74,7 @@
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/services/sessionservice.js"></script>
         <script src="scripts/controllers/listleague.js"></script>
+        <script src="scripts/controllers/createleague.js"></script>
         <!-- endbuild -->
 </body>
 </html>

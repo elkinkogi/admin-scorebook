@@ -10,6 +10,10 @@
 angular.module('adminAppApp')
   .controller('LoginCtrl', function ($scope, $rootScope, SessionService ,$http, $location) {
     
+                if(SessionService.get('isLogged')){
+               $location.path('/listLeague'); 
+            }
+    
     var data_login = {};
     
     if(SessionService.get('isLogged')){

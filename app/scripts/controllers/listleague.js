@@ -14,15 +14,22 @@ angular.module('adminAppApp')
         $location.path('/'); 
     }
     
+    $rootScope.logOut = function(){
+        $rootScope.header = false;
+         SessionService.unset('isLogged');
+        $location.path('/');
+    };
     
+     $rootScope.header = true;
+     $rootScope.headerLeft = false;
+     $rootScope.header_text = true;
      $rootScope.dataHeader = {
          rightHeader:"Create New League",
-         pathRight:'listLeague',
-         leftHeader:"Home",
+         pathRight:'createLeague',
+         leftHeader:'',
          pathLeft:''
      };
     
-     $rootScope.header = true;
     
     var dataJSON = [
             {
@@ -76,14 +83,7 @@ angular.module('adminAppApp')
     ];
     $scope.listLeagues = dataJSON;
     
-    console.log($scope.listLeagues);
-    
-    
-    $rootScope.logOut = function(){
-        alert('hola');
-         SessionService.unset('isLogged');
-        $location.path('/');
-    };
+
     
     
   });

@@ -1,0 +1,136 @@
+<section class="create-league">
+    <form>
+        <div class="row content-create">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="league-name">
+                        League Name*
+                    </label>
+                    <input type="text" name="league-name" id="league-name">
+                </div>
+                <div class="col-xs-6">
+                    <label for="type-league">
+                        Type of League*
+                    </label>
+                    <select class="form-control">
+                        <option>Uno</option>
+                        <option>Dos</option>
+                        <option>Tres</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="location-league">
+                        Location (City, State)*
+                    </label>
+                    <div class="cont-location">
+                        <input type="text" name="location-league" class="location-league" id="location-league">
+                        <select class="form-control state" ng-repeat="value in stateList">
+                           {{ value }}
+                            <option>{{ value }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <label for="Founded-league">
+                        League Founded Date*
+                    </label>
+                    <select class="form-control">
+                        <option>Uno</option>
+                        <option>Dos</option>
+                        <option>Tres</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="twitter-league">
+                        Twitter Account (@user)
+                    </label>
+                    <input type="text" name="twitter-league" id="twitter-league">
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="colors-league">
+                                League Colors*
+                            </label>
+                        </div>
+                        <div class="col-xs-4" style="display:flex;">
+                            <div id="box-color-1"></div>
+                            <button id="choose-1">Chosse</button>
+                        </div>
+                        <div class="col-xs-4" style="display:flex;">
+                            <div id="box-color-2"></div>
+                            <button id="choose-2">Chosse</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="logo-league">
+                        League Logo*
+                    </label>
+                    <input type="file" accept="image/*" id="logo-img" class="filestyle" data-buttonName="btn-primary">
+                </div>
+                <div class="col-xs-6">
+                    <label for="photo-league">
+                        League Photo*
+                    </label>
+                    <input type="file" accept="image/*" id="browse-img" class="filestyle" data-buttonName="btn-primary">
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-6">
+                     <label for="coordinator-league">
+                        League Coordinator Name*
+                    </label>
+                    <input type="text" name="coordinator-league" id="coordinator-league">
+                </div>
+                <div class="col-xs-6">
+                     <label for="tittle-league">
+                        Tittle*
+                    </label>
+                    <input type="text" name="tittle-league" id="tittle-league">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="email-league">
+                        Email*
+                    </label>
+                    <input type="text" name="email-league" id="email-league">
+                </div>
+                <div class="col-xs-6">
+                    <label for="phone-league">
+                        Phone Number*
+                    </label>
+                    <input type="text" name="phone-league" id="phone-league">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="school-league">
+                        School:
+                    </label>
+                    <input type="text" name="school-league" id="school-league">
+                </div>
+                <div class="col-xs-6">
+                    <label for="address-office-league">
+                        League Office Address:
+                    </label>
+                    <input type="text" name="address-office-league" id="address-office-league">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 submit-league">
+                <button type="submit">Create</button>
+                <button type="reset">Cencel</button>
+            </div>
+        </div>
+    </form>
+</section>
