@@ -8,7 +8,7 @@
  * Controller of the adminAppApp
  */
 angular.module('adminAppApp')
-  .controller('CreateleagueCtrl', function ($scope,SessionService, $location, $rootScope, $http) {
+  .controller('CreateleagueCtrl', function ($scope,SessionService, $location, $rootScope, $http, Upload) {
     
      $rootScope.headerLeft = true;
      $rootScope.header_text = false
