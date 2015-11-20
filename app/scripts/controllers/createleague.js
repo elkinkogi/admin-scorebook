@@ -10,6 +10,19 @@
 angular.module('adminAppApp')
   .controller('CreateleagueCtrl', function ($scope,SessionService, $location, $rootScope, $http) {
     
+     $rootScope.headerLeft = true;
+     $rootScope.header_text = false
+     $rootScope.header = true;
+     $rootScope.dataHeader = {
+         rightHeader:'',
+         pathRight:'',
+         leftHeader:'Create New League',
+         pathLeft:''
+     };
+    var dataLeague = {};
+    
+    
+    
     var state = [
         {
             "name": "Alabama", 
@@ -214,23 +227,48 @@ angular.module('adminAppApp')
     ];
     
     
-     $rootScope.headerLeft = true;
-     $rootScope.header_text = false
-     $rootScope.header = true;
-     $rootScope.dataHeader = {
-         rightHeader:'',
-         pathRight:'',
-         leftHeader:'Create New League',
-         pathLeft:''
-     };
+    if(SessionService.get('isLogged')){
+        $http({
+            method: "GET",
+            url: $rootScope.baseurl + "/1.6/leagues/types"
+        }).success(function(data){
+            console.log(data.response_data);
+            $scope.type_league = data.response_data;
+        });
+    }
+    
+    
+    $scope.create = function(){
+        
+            dataLeague.name = $scope.name;
+            dataLeague.city = $scope.city;
+            dataLeague.state = $scope.state;
+            dataLeague.state_association = $scope.state_ass;
+            dataLeague.section = $scope.section_dist;
+            dataLeague.type_id = $scope.type;
+            //dataLeague.logo_url = $scope.state;
+            //dataLeague.photo_url = $scope.state;
+            dataLeague.founded_date = $('#datetimepicker4').val();
+            dataLeague.coordinator_name = $scope.coordinator;
+            dataLeague.email = $scope.email;
+            dataLeague.title = $scope.title;
+            dataLeague.phone_number = $scope.phone;
+            dataLeague.school = $scope.school;
+            dataLeague.twiter_account = $scope.twitter;
+            dataLeague.office_address = $scope.address
+
+            console.log(dataLeague);
+        
+    };
+    
+
     $scope.stateList = state; 
-    console.log($scope.stateList);
     
     $('#choose-1')
         .colorpicker()
         .on('changeColor.colorpicker',function(event){
         
-        $('#box-color-1').html(event.color.toHex());
+        $('#box-color-1').val(event.color.toHex());
         $('#box-color-1').css('background',event.color.toHex());
         
     });
@@ -238,7 +276,7 @@ angular.module('adminAppApp')
     $('#choose-2')
         .colorpicker()
         .on('changeColor.colorpicker',function(event){
-        $('#box-color-2').html(event.color.toHex());
+        $('#box-color-2').val(event.color.toHex());
         $('#box-color-2').css('background',event.color.toHex());
         
     });

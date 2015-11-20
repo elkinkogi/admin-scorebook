@@ -34,6 +34,10 @@ module.exports = function(config) {
       'bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
       'bower_components/angular-fontawesome/dist/angular-fontawesome.js',
       'bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js',
+      'bower_components/moment/moment.js',
+      'bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js',
+      'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+      'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

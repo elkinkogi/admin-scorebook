@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'picardy.fontawesome'
+    'picardy.fontawesome',
+    'ngFileUpload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -45,13 +46,19 @@ angular
         controller: 'CreateleagueCtrl',
         controllerAs: 'createLeague'
       })
+      .when('/addteams', {
+        templateUrl: 'views/addteams.html',
+        controller: 'AddteamsCtrl',
+        controllerAs: 'addteams'
+      })
       .otherwise({
         redirectTo: '/'
       });
   })
     .run(function($rootScope,SessionService,$location, $http){
     
-             $rootScope.header = false;
+            $rootScope.header = false;
+            $rootScope.baseurl = "http://52.8.61.197/api";
             
 
 });
