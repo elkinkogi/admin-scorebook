@@ -8,7 +8,7 @@
  * Controller of the adminAppApp
  */
 angular.module('adminAppApp')
-  .controller('CreateleagueCtrl', function ($scope,SessionService, $location, $rootScope, $http, Upload) {
+  .controller('CreateleagueCtrl', function ($scope,SessionService, $location, $rootScope, $http, Upload, uploadImg) {
     
      $rootScope.headerLeft = true;
      $rootScope.header_text = false
@@ -237,17 +237,20 @@ angular.module('adminAppApp')
         });
     }
     
-    
-    $scope.create = function(){
+    var uploadLeague = function(arg){
+        
+        console.log(arg);
         
             dataLeague.name = $scope.name;
             dataLeague.city = $scope.city;
             dataLeague.state = $scope.state;
-            dataLeague.state_association = $scope.state_ass;
+            dataLeague.state_asociation = $scope.state_ass;
             dataLeague.section = $scope.section_dist;
             dataLeague.type_id = $scope.type;
-            //dataLeague.logo_url = $scope.state;
-            //dataLeague.photo_url = $scope.state;
+            dataLeague.logo = arg.logo || '';
+            dataLeague.photo = arg.photo;
+            dataLeague.color_1 = $("#box-color-1").val();
+            dataLeague.color_2 = $("#box-color-2").val();
             dataLeague.founded_date = $('#datetimepicker4').val();
             dataLeague.coordinator_name = $scope.coordinator;
             dataLeague.email = $scope.email;
@@ -255,9 +258,40 @@ angular.module('adminAppApp')
             dataLeague.phone_number = $scope.phone;
             dataLeague.school = $scope.school;
             dataLeague.twiter_account = $scope.twitter;
-            dataLeague.office_address = $scope.address
-
+            dataLeague.office_address = $scope.address;
+        
+            
             console.log(dataLeague);
+            $http({
+             method: 'POST',
+             url: $rootScope.baseurl + "/1.6/leagues",
+             headers: {
+               'Content-Type': "application/json"
+             },
+             data: dataLeague
+        }).success(function(res){
+                console.log(res);
+            }).error(function(res){
+                console.log(res);
+            });
+        
+    };
+    
+    
+    $scope.create = function(){
+        
+        var objImgs = {};
+        
+            var photo_image = $scope.file;
+        
+            uploadImg.create(photo_image).then(function(res){
+                
+                console.log(res);
+                
+                objImgs.photo = res.data.response_data.photo;
+                
+                uploadLeague(objImgs);
+            });
         
     };
     
