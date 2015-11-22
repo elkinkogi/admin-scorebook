@@ -30,60 +30,21 @@ angular.module('adminAppApp')
          pathLeft:''
      };
     
+    $http.get(
+        $rootScope.baseurl + "/1.6/leagues"
+    ).then(function successCallback(res){
+            $scope.listLeagues = res.data.response_data;
+            console.log(res.data.response_data);
+    },function errorCallback(res){
+        console.log(res);
+    });
     
-    var dataJSON = [
-            {
-                "league_name": "league name 2",
-                "number": "9",
-                "league_coor": "Elkin Bernal",
-                "game_played": "2"
-            },
-            {
-                "league_name": "league name 3",
-                "number": "9",
-                "league_coor": "Elkin Bernal",
-                "game_played": "2"
-            },
-            {
-                "league_name": "league name 4",
-                "number": "9",
-                "league_coor": "Elkin Bernal",
-                "game_played": "2"
-            },
-            {
-                "league_name": "league name 5",
-                "number": "9",
-                "league_coor": "Elkin Bernal",
-                "game_played": "2"
-            },
-            {
-                "league_name": "league name 6",
-                "number": "9",
-                "league_coor": "Elkin Bernal",
-                "game_played": "2"
-            },
-            {
-                "league_name": "league name 7",
-                "number": "9",
-                "league_coor": "Elkin Bernal",
-                "game_played": "2"
-            },
-            {
-                "league_name": "league name 8",
-                "number": "9",
-                "league_coor": "Elkin Bernal",
-                "game_played": "2"
-            },
-            {
-                "league_name": "league name 9",
-                "number": "9",
-                "league_coor": "Elkin Bernal",
-                "game_played": "2"
-            }
-    ];
-    $scope.listLeagues = dataJSON;
     
-
+    $('.edit-league').click(function(evt){
+        
+        $(this)
+        
+    });
     
     
   });

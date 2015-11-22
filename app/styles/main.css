@@ -7,6 +7,10 @@ a{
     color: gray;
 }
 
+i{
+    cursor: pointer;
+}
+
 header{
     display: flex;
     justify-content: space-between;
@@ -242,6 +246,10 @@ th, td {
 
 .form-teams{
     display: flex
+}
+
+.input-group-btn{
+    width: 100% !important; 
 }
 
 

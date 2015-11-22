@@ -247,7 +247,7 @@ angular.module('adminAppApp')
             dataLeague.state_asociation = $scope.state_ass;
             dataLeague.section = $scope.section_dist;
             dataLeague.type_id = $scope.type;
-            dataLeague.logo = arg.logo || '';
+            dataLeague.logo = arg.logo;
             dataLeague.photo = arg.photo;
             dataLeague.color_1 = $("#box-color-1").val();
             dataLeague.color_2 = $("#box-color-2").val();
@@ -269,12 +269,11 @@ angular.module('adminAppApp')
                'Content-Type': "application/json"
              },
              data: dataLeague
-        }).success(function(res){
+        }).then(function successCallback(res){
                 console.log(res);
-            }).error(function(res){
-                console.log(res);
+            },function errorCallback(res){
+                console.log(res); 
             });
-        
     };
     
     
@@ -282,12 +281,14 @@ angular.module('adminAppApp')
         
         var objImgs = {};
         
-            var photo_image = $scope.file;
+            var logo_image = $scope.file_logo;
+            var photo_image = $scope.file_photo;
         
-            uploadImg.create(photo_image).then(function(res){
+            uploadImg.create(logo_image, photo_image).then(function(res){
                 
                 console.log(res);
                 
+                objImgs.logo = res.data.response_data.logo;
                 objImgs.photo = res.data.response_data.photo;
                 
                 uploadLeague(objImgs);

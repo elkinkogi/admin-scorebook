@@ -7,10 +7,10 @@
         <th>Actions</th>
     </tr>
     <tr ng-repeat="value in listLeagues">
-        <td>{{ value.league_name }}</td>
-        <td>{{ value.number }}</td>
-        <td>{{ value.league_coor }}</td>
-        <td>{{ value.game_played }}</td>
-        <td><i class="fa fa-pencil"></i> &ensp;&ensp;&ensp; <i class="fa fa-trash"></i></td>
+        <td>{{ value.name }}</td>
+        <td>{{ value.number_of_teams }}</td>
+        <td>{{ value.coordinator_name }}</td>
+        <td>{{ value.games_played }}</td>
+        <td><i class="fa fa-pencil edit-league" data-id-league="{{ value.id }}" ></i> &ensp;&ensp;&ensp; <i class="fa fa-trash"></i></td>
     </tr>
 </table>
