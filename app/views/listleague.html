@@ -11,6 +11,6 @@
         <td>{{ value.number_of_teams }}</td>
         <td>{{ value.coordinator_name }}</td>
         <td>{{ value.games_played }}</td>
-        <td><i class="fa fa-pencil edit-league" data-id-league="{{ value.id }}" ></i> &ensp;&ensp;&ensp; <i class="fa fa-trash"></i></td>
+        <td><i class="fa fa-pencil" ng-click="create({{ value.id }})"></i> &ensp;&ensp;&ensp; <i class="fa fa-trash" ng-click="deleteLeague({{ value.id }})" ></i></td>
     </tr>
 </table>

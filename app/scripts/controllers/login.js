@@ -26,7 +26,7 @@ angular.module('adminAppApp')
         data_login.password = $scope.password;
         
         
-        if(data_login.email == "elkin-21@hotmail.com" && data_login.password == "password"){
+        if(data_login.email == "test@test.com" && data_login.password == "password"){
             SessionService.set('isLogged', true, true);
             
             $location.path('/listLeague');

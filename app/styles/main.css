@@ -182,15 +182,14 @@ th, td {
 }
 
 #box-color-1{
-    width: 70px;
+    width: 59px !important;
     height: 30px;
-    color: #FFF;
 }
 
 #box-color-2{
-    width: 70px;
+    width: 59px !important;
     height: 30px;
-    color: #FFF;
+    
 }
 
 .form-control{
