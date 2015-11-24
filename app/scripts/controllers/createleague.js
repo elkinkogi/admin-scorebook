@@ -19,7 +19,7 @@ angular.module('adminAppApp')
          leftHeader:'Create New League',
          pathLeft:''
      };
-    var dataLeague = {};
+
     
     
     
@@ -237,22 +237,82 @@ angular.module('adminAppApp')
         });
     }
     
-        
-        var uploadLeague = function(arg){
+     if(SessionService.get('league')){
+         
+        $('.btn-create').html('Update');
+         
+        var leagueUpdate = SessionService.get('league');
 
+        $scope.name = leagueUpdate.name;
+        $scope.city = leagueUpdate.city;
+        $scope.state = leagueUpdate.state;
+        $scope.state_ass = leagueUpdate.state_association;
+        $scope.section_dist = leagueUpdate.section;
+        $scope.type = leagueUpdate.type_id;
+        $scope.logo_url = leagueUpdate.logo_url;
+        $scope.photo_url = leagueUpdate.photo_url;
+        $('#box-color-1').css("background", leagueUpdate.color_1);
+        $('#box-color-2').css("background", leagueUpdate.color_2);
+        $('#box-color-1-span').html(leagueUpdate.color_1);
+        $('#box-color-2-span').html(leagueUpdate.color_2);
+        $scope.founded_date = leagueUpdate.founded_date;
+        $scope.coordinator = leagueUpdate.coordinator_name;
+        $scope.email = leagueUpdate.email;
+        $scope.title = leagueUpdate.title;
+        $scope.phone = leagueUpdate.phone_number;
+        $scope.school = leagueUpdate.school;
+        $scope.twitter = leagueUpdate.twitter_account;
+        $scope.address = leagueUpdate.office_address;
+     }else{
+         $('.btn-create').html('Create');
+     }
+
+    
+    $scope.create = function(){
+        
+        console.log(new Date($('#datetimepicker4').val()).toISOString);
+    
+        if(!SessionService.get('league')){
+                    
+                    console.log('crear');
+
+                    var objImgs = {};
+
+                    var logo_image = $scope.file_logo;
+                    var photo_image = $scope.file_photo;
+
+                    uploadImg.create(logo_image, photo_image).then(function(res){
+
+                        console.log(res);
+
+                        objImgs.logo = res.data.response_data.logo;
+                        objImgs.photo = res.data.response_data.photo;
+
+                        addLeague(objImgs);
+                    });
+            
+            }
+        
+    };
+    
+        
+        
+        var addLeague = function(arg){
+
+                var dataLeague = {};
                 console.log(arg);
 
                 dataLeague.name = $scope.name;
                 dataLeague.city = $scope.city;
                 dataLeague.state = $scope.state;
-                dataLeague.state_asociation = $scope.state_ass;
+                dataLeague.state_association = $scope.state_ass;
                 dataLeague.section = $scope.section_dist;
                 dataLeague.type_id = $scope.type;
                 dataLeague.logo = arg.logo;
                 dataLeague.photo = arg.photo;
-                dataLeague.color_1 = $("#box-color-1").val();
-                dataLeague.color_2 = $("#box-color-2").val();
-                dataLeague.founded_date = new Date($('#datetimepicker4').val());
+                dataLeague.color_1 = $("#box-color-1-span").html();
+                dataLeague.color_2 = $("#box-color-2-span").html();
+                dataLeague.founded_date = new Date($('#datetimepicker4').val()).toISOString();
                 dataLeague.coordinator_name = $scope.coordinator;
                 dataLeague.email = $scope.email;
                 dataLeague.title = $scope.title;
@@ -280,62 +340,13 @@ angular.module('adminAppApp')
                 
         };
     
-    
-        if(!SessionService.get('league')){
-    
-            $scope.create = function(){
-
-                    var objImgs = {};
-
-                    var logo_image = $scope.file_logo;
-                    var photo_image = $scope.file_photo;
-
-                    uploadImg.create(logo_image, photo_image).then(function(res){
-
-                        console.log(res);
-
-                        objImgs.logo = res.data.response_data.logo;
-                        objImgs.photo = res.data.response_data.photo;
-
-                        uploadLeague(objImgs);
-                    });
-
-            };
-            
-        }else{
-            
-            var leagueUpdate = SessionService.get('league');
-
-                $scope.name = leagueUpdate.name;
-                $scope.city = leagueUpdate.city;
-                $scope.state = leagueUpdate.state;
-                $scope.state_ass = leagueUpdate.state_association;
-                $scope.section_dist = leagueUpdate.section;
-                $scope.type = leagueUpdate.type_id;
-                $scope.logo_url = leagueUpdate.logo_url;
-                $scope.photo_url = leagueUpdate.photo_url;
-                $('#box-color-1').css("background", leagueUpdate.color_1);
-                $('#box-color-2').css("background", leagueUpdate.color_2);
-                $('#box-color-1-span').html(leagueUpdate.color_1);
-                $('#box-color-2-span').html(leagueUpdate.color_2);
-                $scope.founded_date = leagueUpdate.founded_date;
-                $scope.coordinator = leagueUpdate.coordinator_name;
-                $scope.email = leagueUpdate.email;
-                $scope.title = leagueUpdate.title;
-                $scope.phone = leagueUpdate.phone_number;
-                $scope.school = leagueUpdate.school;
-                $scope.twitter = leagueUpdate.twitter_account;
-                $scope.address = leagueUpdate.office_address;
-            
-        }
 
     $scope.stateList = state; 
     
     $('#choose-1')
         .colorpicker()
         .on('changeColor.colorpicker',function(event){
-        
-        $('#box-color-1').val(event.color.toHex());
+        $('#box-color-1-span').html(event.color.toHex());
         $('#box-color-1').css('background',event.color.toHex());
         
     });
@@ -343,7 +354,7 @@ angular.module('adminAppApp')
     $('#choose-2')
         .colorpicker()
         .on('changeColor.colorpicker',function(event){
-        $('#box-color-2').val(event.color.toHex());
+        $('#box-color-2-span').html(event.color.toHex());
         $('#box-color-2').css('background',event.color.toHex());
         
     });

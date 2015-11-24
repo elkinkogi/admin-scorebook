@@ -1,5 +1,5 @@
 <section class="create-league">
-    <form>
+    <form ng-submit="create()">
         <div class="row content-create">
             <div class="row">
                 <div class="col-xs-6">
@@ -147,7 +147,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12 submit-league">
-                <button class="btn btn-default set" ng-click="create(1, null)">Create</button>
+                <button type="submit" class="btn-create" class="btn btn-default set">Create</button>
                 <button class="btn btn-default" ng-click="cancel()">Cancel</button>
             </div>
         </div>

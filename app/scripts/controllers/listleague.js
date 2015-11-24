@@ -89,8 +89,9 @@ angular.module('adminAppApp')
                     $rootScope.baseurl + "/1.6/leagues/" + id_league
 
                 ).then(function(res){
+                    console.log(res);
                     SessionService.set('league',res.data);
-                    $location.path('/createLeague');
+                    $location.path('/editLeague');
 
                 },function(res){
 

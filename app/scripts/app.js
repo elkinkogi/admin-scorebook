@@ -46,6 +46,11 @@ angular
         controller: 'CreateleagueCtrl',
         controllerAs: 'createLeague'
       })
+      .when('/editLeague', {
+        templateUrl: 'views/createleague.html',
+        controller: 'CreateleagueCtrl',
+        controllerAs: 'createLeague'
+      })
       .when('/addteams', {
         templateUrl: 'views/addteams.html',
         controller: 'AddteamsCtrl',
