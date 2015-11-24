@@ -19,6 +19,9 @@ angular.module('adminAppApp')
          leftHeader:'Create New League',
          pathLeft:''
      };
+    
+    
+    
 
     
     
@@ -273,26 +276,79 @@ angular.module('adminAppApp')
         console.log(new Date($('#datetimepicker4').val()).toISOString);
     
         if(!SessionService.get('league')){
+
+                console.log('crear');
+
+                var objImgs = {};
+
+                var logo_image = $scope.file_logo;
+                var photo_image = $scope.file_photo;
+
+                uploadImg.create(logo_image, photo_image).then(function(res){
+
+                    console.log(res);
+
+                    objImgs.logo = res.data.response_data.logo;
+                    objImgs.photo = res.data.response_data.photo;
+                    objImgs._ = 1;
+
+                    addLeague(objImgs);
+                },function(res){
                     
-                    console.log('crear');
+                    console.log(res);
+                    alert('No se seleccionaron las imagenes');
+                    
+                });
+            
+            }else{
 
-                    var objImgs = {};
+                console.log('Editar');
 
-                    var logo_image = $scope.file_logo;
-                    var photo_image = $scope.file_photo;
+                var objImgs = {};
+
+                var logo_image = $scope.file_logo;
+                var photo_image = $scope.file_photo;
+
+
+                if( typeof logo_image == 'undefined' && photo_image ){
 
                     uploadImg.create(logo_image, photo_image).then(function(res){
 
                         console.log(res);
-
-                        objImgs.logo = res.data.response_data.logo;
+                        var objImgs = {};
+                        objImgs.logo = SessionService.get('league').logo;
                         objImgs.photo = res.data.response_data.photo;
+                        objImgs._ = 2;
 
                         addLeague(objImgs);
                     });
+
+                }
+
+                if( typeof photo_image == 'undefined' && logo_image ){
+                    uploadImg.create(logo_image, photo_image).then(function(res){
+
+                        console.log(res);
+                        var objImgs = {};
+                        objImgs.logo = res.data.response_data.logo;
+                        objImgs.photo = SessionService.get('league').photo;
+                        objImgs._ = 2;
+
+                        addLeague(objImgs);
+                    });
+                }
+                
+                if( typeof photo_image == 'undefined' &&  typeof logo_image == 'undefined' ){
+                    var objImgs = {};
+                    objImgs.logo = SessionService.get('league').logo;
+                    objImgs.photo = SessionService.get('league').photo;
+                    objImgs._ = 2;
+
+                        addLeague(objImgs);
+                }
+                
             
             }
-        
     };
     
         
@@ -301,6 +357,8 @@ angular.module('adminAppApp')
 
                 var dataLeague = {};
                 console.log(arg);
+            
+                console.log($('#datetimepicker4').val());
 
                 dataLeague.name = $scope.name;
                 dataLeague.city = $scope.city;
@@ -312,7 +370,7 @@ angular.module('adminAppApp')
                 dataLeague.photo = arg.photo;
                 dataLeague.color_1 = $("#box-color-1-span").html();
                 dataLeague.color_2 = $("#box-color-2-span").html();
-                dataLeague.founded_date = new Date($('#datetimepicker4').val()).toISOString();
+                dataLeague.founded_date = Date.parse($('#datetimepicker4').val());
                 dataLeague.coordinator_name = $scope.coordinator;
                 dataLeague.email = $scope.email;
                 dataLeague.title = $scope.title;
@@ -322,21 +380,37 @@ angular.module('adminAppApp')
                 dataLeague.office_address = $scope.address;
 
 
-                console.log(dataLeague);
-                $http({
-                     method: 'POST',
-                     url: $rootScope.baseurl + "/1.6/leagues",
-                     headers: {
-                       'Content-Type': "application/json"
-                     },
-                     data: dataLeague
-                }).then(function successCallback(res){
-                    console.log(res);
-                    SessionService.set('league',res.data.response_data);
-                    $location.path('/listleague');
-                },function errorCallback(res){
-                    console.log(res); 
-                });
+            
+                if(dataLeague._ == 1){
+                    $http({
+                         method: 'POST',
+                         url: $rootScope.baseurl + "/1.6/leagues",
+                         headers: {
+                           'Content-Type': "application/json"
+                         },
+                         data: dataLeague
+                    }).then(function successCallback(res){
+                        console.log(res);
+                        SessionService.set('league',res.data.response_data);
+                        $location.path('/listleague');
+                    },function errorCallback(res){
+                        console.log(res); 
+                    });
+                }else{
+                     $http.put(
+                         $rootScope.baseurl + "/1.6/leagues/" + SessionService.get('league').id,
+                         dataLeague,
+                         {
+                           'Content-Type': "application/json"
+                         }
+                    ).then(function successCallback(res){
+                        console.log(res);
+                        SessionService.set('league',res.data.response_data);
+                        $location.path('/listleague');
+                    },function errorCallback(res){
+                        console.log(res); 
+                    });
+                }
                 
         };
     

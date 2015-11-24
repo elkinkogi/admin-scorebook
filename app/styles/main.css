@@ -174,11 +174,12 @@ th, td {
 }
 
 
-.content-create div div{
+.content-create > div div{
     display: flex;
     justify-content: space-between;
     padding: 6px;
     align-items: center;
+    
 }
 
 #box-color-1{
@@ -249,6 +250,10 @@ th, td {
 
 .input-group-btn{
     width: 100% !important; 
+}
+
+.colors{
+    flex: 1;
 }
 
 

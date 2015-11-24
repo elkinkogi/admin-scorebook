@@ -33,10 +33,12 @@
                     <label for="Founded-league">
                         League Founded Date*
                     </label>
-                    <input type="text" id='datetimepicker4' ng-model="founded_date" required>
+                    <input type="text" id='datetimepicker4' ng-model="founded_date" value="{{founded_date | date:'dd-mm-yyyy h:MM a'}}" required>
                     <script type="text/javascript">
                         $(function () {
-                            $('#datetimepicker4').datetimepicker();
+                            $('#datetimepicker4').datetimepicker({
+                                format: "DD/MM/YYYY"
+                            });
                         });
                     </script>
                 </div>
@@ -66,19 +68,19 @@
                     <input type="text" name="twitter-league" id="twitter-league" ng-model="twitter">
                 </div>
                 <div class="col-xs-6">
-                    <div class="row">
+                    <div class="row colors">
                         <div class="col-xs-4">
                             <label for="colors-league">
                                 League Colors*
                             </label>
                         </div>
                         <div class="col-xs-4" style="display:flex; justify-content: space-around;">
-                            <input type="text" id="box-color-1" ng-model="color_1" required>
+                            <div id="box-color-1" ng-model="color_1"></div>
                             <span id="box-color-1-span"></span>
                             <button id="choose-1">Choose</button>
                         </div>
                         <div class="col-xs-4" style="display:flex;">
-                            <input type="text" id="box-color-2" ng-model="color_2" required>
+                            <div id="box-color-2" ng-model="color_2"></div>
                             <span id="box-color-2-span"></span>
                             <button id="choose-2">Choose</button>
                         </div>
@@ -91,16 +93,33 @@
                         League Logo*
                     </label>
                     <img ng-src="{{ logo_url }}" width="150" >
-                    <input type="file" accept="image/*" id="logo-img" class="filestyle" uploader-model="file_logo" data-buttonName="btn-primary" required>
+                    <input type="file" accept="image/*" id="logo-img" class="filestyle" uploader-model="file_logo" data-buttonName="btn-primary">
                 </div>
                 <div class="col-xs-6">
                     <label for="photo-league">
                         League Photo*
                     </label>
                     <img ng-src="{{ photo_url }}" width="150" >
-                    <input type="file" accept="image/*" id="browse-img" class="filestyle" uploader-model="file_photo" ng-model="file_photo" data-buttonName="btn-primary" required>
+                    <input type="file" accept="image/*" id="browse-img" class="filestyle" uploader-model="file_photo" ng-model="file_photo" data-buttonName="btn-primary">
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="season-league">
+                        Season*
+                    </label>
+                    <select class="form-control" required ng-model="type">
+                        <option value="{{ value.id }}" ng-repeat="value in type_league">{{ value.name }}</option>
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    <label for="">
+                        
+                    </label>
+                </div>
+            </div>
+            
             <hr />
             <div class="row">
                 <div class="col-xs-6"> 
