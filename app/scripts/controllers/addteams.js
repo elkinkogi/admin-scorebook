@@ -8,7 +8,7 @@
  * Controller of the adminAppApp
  */
 angular.module('adminAppApp')
-  .controller('AddteamsCtrl', function ($scope,$rootScope,$location,SessionService) {
+  .controller('AddteamsCtrl', function ($scope, $rootScope, $location, $http, $q, $timeout, SessionService) {
 
      $rootScope.headerLeft = true;
      $rootScope.header_text = false
@@ -19,6 +19,9 @@ angular.module('adminAppApp')
          leftHeader:'Add Teams To League name 1',
          pathLeft:''
      };
+    
+    $scope.education = "highSchool";
+    
         if(!SessionService.get('isLogged')){
         $location.path('/'); 
     }
@@ -46,6 +49,43 @@ angular.module('adminAppApp')
             }
             
     ];
+    
+    
+    $scope.getTeams = function(keyword) {
+      var deferred = $q.defer();
+      
+      var objResul = {};
+      
+      $http.get( 'http://52.8.61.197/api/1.6/teams/search?team_type=highSchool&name='+keyword )
+            .then(
+                    function(results) { 
+                        
+                        objResul = results.data;
+                      
+                        console.log(objResul); 
+                      
+                      $timeout(function(){deferred.resolve(objResul)});
+                        
+                    });
+        return deferred.promise;
+
+    };
+    
+    
+    $scope.searchTeam = function(){
+        
+        console.log($scope.searchText);
+        console.log($scope.selected_team);
+        var searchText = $scope.searchText;
+        var select_team = $scope.selected_team;
+        
+
+        
+        
+    };
+    
+    
+    
     $scope.listTeams = dataJSON;
     
     

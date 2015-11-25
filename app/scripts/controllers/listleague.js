@@ -33,38 +33,33 @@ angular.module('adminAppApp')
      };
     
     $http.get(
-        $rootScope.baseurl + "/1.6/leagues"
-    ).then(function successCallback(res){
-            $scope.listLeagues = res.data.response_data;
-            console.log(res.data.response_data);
-    },function errorCallback(res){
-        console.log(res);
+            $rootScope.baseurl + "/1.6/leagues"
+        ).then(function successCallback(res){
+                $scope.listLeagues = res.data.response_data;
+                console.log(res.data.response_data);
+        },function errorCallback(res){
+            console.log(res);
     });
     
     
     
     
     $scope.create = function(id_league){
-                $http.get(
+            $http.get(
 
-                    $rootScope.baseurl + "/1.6/leagues/" + id_league
+                $rootScope.baseurl + "/1.6/leagues/" + id_league
 
-                ).then(function(res){
-                    console.log(res);
-                    SessionService.set('league',res.data);
-                    $location.path('/editLeague');
+            ).then(function(res){
+                console.log(res);
+                SessionService.set('league',res.data);
+                $location.path('/editLeague');
 
-                },function(res){
+            },function(res){
 
-                    console.log(res);
+                console.log(res);
 
-                });
+            });
 
         };
-    
-    
-    
-    
-    
-    
+
   });

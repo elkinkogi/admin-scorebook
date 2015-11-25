@@ -16,6 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ngMaterial',
     'picardy.fontawesome',
     'ngFileUpload'
   ])

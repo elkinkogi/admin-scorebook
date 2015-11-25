@@ -2,23 +2,36 @@
     
         <div class="row content-create">
             <div class="row">
-               <form>
+               <form ng-submit="searchTeam()" class="add_team">
                     <div class="col-xs-6 radio-addteams">
-                        <input type="radio" name="education" value="High School">    
+                        <input type="radio" ng-model="education" value="highSchool">    
                         <label for="league-name">
                             High School
                         </label>
-                        <input type="radio" name="education" value="College"> 
+                        <input type="radio" ng-model="education" value="college"> 
                         <label for="league-name">
                             College
                         </label>
-                        <input type="text" placeholder="Type team name" name="type-team" class="type-team" id="type-team">
+                        <md-autocomplete
+                            md-selected-item="selectedItem" 
+                            md-search-text="searchText" 
+                            md-items="item in getTeams(searchText)" 
+                            md-item-text="item" 
+                            placeholder="Type team name"
+                            class="type-team" 
+                            id="type-team">
+                            <span md-highlight-text="searchText">{{ item }}</span>
+                        </md-autocomplete>
                     </div>
                     <div class="col-xs-6">
-                        <select class="form-control">
-                            <option>Team1</option>
-                            <option>Team2</option>
-                            <option>Team3</option>
+                        <select id="selected_team" class="form-control" ng-model="selected_team">
+                            <option value="null"></option>
+                            <option value="[2,1]">Junior Varsity boys</option>
+                            <option value="[2,2]">Junior Varsity girls</option>
+                            <option value="[1,1]">Varsity boys</option>
+                            <option value="[1,2]">Varsity girls</option>
+                            <option value="[3,1]">Freshman boys</option>
+                            <option value="[3,2]">Freshman girls</option>
                         </select>
                         <button class="btn btn-default set" type="submit">Add</button>
                     </div>

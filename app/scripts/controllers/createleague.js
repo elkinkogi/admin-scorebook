@@ -255,6 +255,12 @@ angular.module('adminAppApp')
      if(SessionService.get('league')){
          
         $('.btn-create').html('Update');
+                 
+         var options = {
+          year: 'numeric', month: 'numeric', day: 'numeric',
+          hour: 'numeric', minute: 'numeric',
+          hour12: true
+        };
          
         var leagueUpdate = SessionService.get('league');
 
@@ -271,7 +277,7 @@ angular.module('adminAppApp')
         $('#box-color-2').css("background", leagueUpdate.color_2);
         $('#box-color-1-span').html(leagueUpdate.color_1);
         $('#box-color-2-span').html(leagueUpdate.color_2);
-        $scope.founded_date = leagueUpdate.founded_date;
+        $scope.founded_date = new Date(leagueUpdate.founded_date).toLocaleString('en-US',options);
         $scope.coordinator = leagueUpdate.coordinator_name;
         $scope.email = leagueUpdate.email;
         $scope.title = leagueUpdate.title;
@@ -279,6 +285,9 @@ angular.module('adminAppApp')
         $scope.school = leagueUpdate.school;
         $scope.twitter = leagueUpdate.twitter_account;
         $scope.address = leagueUpdate.office_address;
+         
+         console.log(new Date(leagueUpdate.founded_date).toLocaleString('en-US',options));
+         
      }else{
          $('.btn-create').html('Create');
      }
