@@ -74,14 +74,60 @@ angular.module('adminAppApp')
     
     $scope.searchTeam = function(){
         
-        console.log($scope.searchText);
-        console.log($scope.selected_team);
         var searchText = $scope.searchText;
-        var select_team = $scope.selected_team;
+        var level = JSON.parse($scope.selected_team)[0];
+        var gender = JSON.parse($scope.selected_team)[1];
         
-
-        
-        
+        $http.get(
+            $rootScope.baseurl + "/1.6/leagues/searchTeam?teamType=highSchool&name=" + searchText + "&level=" + level + "&gender="+ gender + ""
+        ).then(function(res){
+            console.log(res);
+            
+            if(res.data.response_data.user_id == null){
+                
+                add_user_team(119081);
+                
+            }
+            
+        }, function(res){
+            console.log(res);
+        });
+    };
+    
+    
+    var add_user_team = function(arg){
+    
+        bootbox.confirm({
+            size: "small",
+            message: "Please complete the following information in order to add the team",
+            callback:function(result){
+                
+                iElement.hide();
+                if(result){
+                    
+                    $http.delete(
+                        
+                        $rootScope.baseurl + "/1.6/leagues/" + id_league
+                        
+                    ).then(function(res){
+                        console.log(res);
+                    },function(res){
+                        console.log(res); 
+                    });
+                    
+                }
+                
+            },
+            buttons:{
+                cancel:{
+                    label:'Cancel'
+                },
+                confirm:{
+                    label:'Delete'
+                }
+            }
+        });
+    
     };
     
     

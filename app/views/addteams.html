@@ -13,6 +13,7 @@
                             College
                         </label>
                         <md-autocomplete
+                           required
                             md-selected-item="selectedItem" 
                             md-search-text="searchText" 
                             md-items="item in getTeams(searchText)" 
@@ -24,8 +25,8 @@
                         </md-autocomplete>
                     </div>
                     <div class="col-xs-6">
-                        <select id="selected_team" class="form-control" ng-model="selected_team">
-                            <option value="null"></option>
+                        <select id="selected_team" class="form-control" ng-model="selected_team" required>
+                            <option></option>
                             <option value="[2,1]">Junior Varsity boys</option>
                             <option value="[2,2]">Junior Varsity girls</option>
                             <option value="[1,1]">Varsity boys</option>
@@ -35,6 +36,7 @@
                         </select>
                         <button class="btn btn-default set" type="submit">Add</button>
                     </div>
+
                 </form>
             </div>
             <form>
