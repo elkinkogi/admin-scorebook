@@ -10,7 +10,11 @@
 angular.module('adminAppApp')
   .controller('CreateleagueCtrl', function ($scope,SessionService, $location, $rootScope, $http, Upload, uploadImg) {
     
-     $rootScope.headerLeft = true;
+    if(!SessionService.get('isLogged')){
+        $location.path('/'); 
+    } 
+    
+    $rootScope.headerLeft = true;
      $rootScope.header_text = false
      $rootScope.header = true;
      $rootScope.dataHeader = {
@@ -260,6 +264,7 @@ angular.module('adminAppApp')
         $scope.state_ass = leagueUpdate.state_association;
         $scope.section_dist = leagueUpdate.section;
         $scope.type = leagueUpdate.type_id;
+        $scope.season = leagueUpdate.season;
         $scope.logo_url = leagueUpdate.logo_url;
         $scope.photo_url = leagueUpdate.photo_url;
         $('#box-color-1').css("background", leagueUpdate.color_1);
@@ -326,6 +331,7 @@ angular.module('adminAppApp')
                         var objImgs = {};
                         objImgs.logo = SessionService.get('league').logo;
                         objImgs.photo = res.data.response_data.photo;
+                        objImgs.id = SessionService.get('league').id;
                         objImgs._ = 2;
 
                         addLeague(objImgs);
@@ -340,6 +346,7 @@ angular.module('adminAppApp')
                         var objImgs = {};
                         objImgs.logo = res.data.response_data.logo;
                         objImgs.photo = SessionService.get('league').photo;
+                        objImgs.id = SessionService.get('league').id;
                         objImgs._ = 2;
 
                         addLeague(objImgs);
@@ -350,9 +357,24 @@ angular.module('adminAppApp')
                     var objImgs = {};
                     objImgs.logo = SessionService.get('league').logo;
                     objImgs.photo = SessionService.get('league').photo;
+                    objImgs.id = SessionService.get('league').id;
                     objImgs._ = 2;
 
                         addLeague(objImgs);
+                }
+                
+                if(photo_image && logo_image){
+                    uploadImg.create(logo_image, photo_image).then(function(res){
+
+                        console.log(res);
+                        var objImgs = {};
+                        objImgs.logo = res.data.response_data.logo;
+                        objImgs.photo = res.data.response_data.photo;
+                        objImgs.id = SessionService.get('league').id;
+                        objImgs._ = 2;
+
+                        addLeague(objImgs);
+                    });
                 }
                 
             
@@ -387,8 +409,7 @@ angular.module('adminAppApp')
                 dataLeague.school = $scope.school;
                 dataLeague.twitter_account = $scope.twitter;
                 dataLeague.office_address = $scope.address;
-
-
+            
             
                 if(arg._ == 1){
                     $http({
@@ -407,7 +428,7 @@ angular.module('adminAppApp')
                     });
                 }else{
                      $http.put(
-                         $rootScope.baseurl + "/1.6/leagues/",
+                         $rootScope.baseurl + "/1.6/leagues/" + arg.id,
                          dataLeague,
                          {
                            'Content-Type': "application/json"
@@ -423,8 +444,14 @@ angular.module('adminAppApp')
                 
         };
     
-
+    $(function () {
+        $('#datetimepicker4').datetimepicker();
+    });
+    
+    
     $scope.stateList = state; 
+    
+
     
     $('#choose-1')
         .colorpicker()

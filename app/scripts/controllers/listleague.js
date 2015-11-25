@@ -41,45 +41,6 @@ angular.module('adminAppApp')
         console.log(res);
     });
     
-    $scope.deleteLeague = function(id_league){
-        
-        console.log(id_league);
-        
-        bootbox.addLocale
-        
-        bootbox.confirm({
-            size: "small",
-            message: "Are you sure you want to \n delete League name 2?",
-            callback:function(result){
-                
-                if(result){
-                    
-                    $http.delete(
-                        
-                        $rootScope.baseurl + "/1.6/leagues/" + id_league
-                        
-                    ).then(function(res){
-                        console.log(res);
-                        window.location.reload();
-                    },function(res){
-                        console.log(res); 
-                    });
-                    
-                }
-                
-            },
-            buttons:{
-                cancel:{
-                    label:'Cancel'
-                },
-                confirm:{
-                    label:'Delete'
-                }
-            }
-        });
-        
-    };
-    
     
     
     

@@ -8,8 +8,8 @@
  * Controller of the adminAppApp
  */
 angular.module('adminAppApp')
-  .controller('AddteamsCtrl', function ($scope,$rootScope) {
-    
+  .controller('AddteamsCtrl', function ($scope,$rootScope,$location,SessionService) {
+
      $rootScope.headerLeft = true;
      $rootScope.header_text = false
      $rootScope.header = true;
@@ -19,7 +19,9 @@ angular.module('adminAppApp')
          leftHeader:'Add Teams To League name 1',
          pathLeft:''
      };
-    
+        if(!SessionService.get('isLogged')){
+        $location.path('/'); 
+    }
     
         var dataJSON = [
             {

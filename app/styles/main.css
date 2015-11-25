@@ -182,6 +182,14 @@ th, td {
     
 }
 
+.addteams-league > div div{
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+    align-items: center;
+    
+}
+
 #box-color-1{
     width: 59px !important;
     height: 30px;
