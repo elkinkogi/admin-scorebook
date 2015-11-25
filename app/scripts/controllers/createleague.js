@@ -237,6 +237,14 @@ angular.module('adminAppApp')
         }).success(function(data){
             console.log(data.response_data);
             $scope.type_league = data.response_data;
+        }); 
+        
+        $http({
+            method: "GET",
+            url: $rootScope.baseurl + "/1.6/leagues/seasons"
+        }).success(function(data){
+            console.log(data.response_data);
+            $scope.season_league = data.response_data;
         });
     }
     
@@ -365,12 +373,13 @@ angular.module('adminAppApp')
                 dataLeague.state = $scope.state;
                 dataLeague.state_association = $scope.state_ass;
                 dataLeague.section = $scope.section_dist;
+                dataLeague.season = $scope.season;
                 dataLeague.type_id = $scope.type;
                 dataLeague.logo = arg.logo;
                 dataLeague.photo = arg.photo;
                 dataLeague.color_1 = $("#box-color-1-span").html();
                 dataLeague.color_2 = $("#box-color-2-span").html();
-                dataLeague.founded_date = Date.parse($('#datetimepicker4').val());
+                dataLeague.founded_date = new Date($('#datetimepicker4').val()).toISOString();
                 dataLeague.coordinator_name = $scope.coordinator;
                 dataLeague.email = $scope.email;
                 dataLeague.title = $scope.title;
@@ -381,7 +390,7 @@ angular.module('adminAppApp')
 
 
             
-                if(dataLeague._ == 1){
+                if(arg._ == 1){
                     $http({
                          method: 'POST',
                          url: $rootScope.baseurl + "/1.6/leagues",
@@ -398,7 +407,7 @@ angular.module('adminAppApp')
                     });
                 }else{
                      $http.put(
-                         $rootScope.baseurl + "/1.6/leagues/" + SessionService.get('league').id,
+                         $rootScope.baseurl + "/1.6/leagues/",
                          dataLeague,
                          {
                            'Content-Type': "application/json"

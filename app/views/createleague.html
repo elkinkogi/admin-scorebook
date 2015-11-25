@@ -36,9 +36,7 @@
                     <input type="text" id='datetimepicker4' ng-model="founded_date" value="{{founded_date | date:'dd-mm-yyyy h:MM a'}}" required>
                     <script type="text/javascript">
                         $(function () {
-                            $('#datetimepicker4').datetimepicker({
-                                format: "DD/MM/YYYY"
-                            });
+                            $('#datetimepicker4').datetimepicker();
                         });
                     </script>
                 </div>
@@ -109,8 +107,8 @@
                     <label for="season-league">
                         Season*
                     </label>
-                    <select class="form-control" required ng-model="type">
-                        <option value="{{ value.id }}" ng-repeat="value in type_league">{{ value.name }}</option>
+                    <select class="form-control" required ng-model="season">
+                        <option value="{{ value }}" ng-repeat="value in season_league">{{ value }}</option>
                     </select>
                 </div>
                 <div class="col-xs-6">
