@@ -28,9 +28,18 @@ angular.module('adminAppApp')
     
     if(SessionService.get('league')){
         
-        $scope.listTeams = SessionService.get('league').teams;
-        console.log(SessionService.get('league').teams);
-        console.log(SessionService.get('league'));
+        var id_league = SessionService.get('league').id;
+
+        $http.get(
+            $rootScope.baseurl + "/1.6/leagues/" + id_league
+        ).then(function(res){
+            console.log(res);
+            
+            $scope.listTeams = res.data.teams;
+            
+        })
+        
+
         
     }else{
         $location.path('/'); 
@@ -71,7 +80,7 @@ angular.module('adminAppApp')
       
       var objResul = {};
       
-      $http.get( 'http://52.8.61.197/api/1.6/teams/search?team_type=highSchool&name='+keyword )
+      $http.get( $rootScope.baseurl + '/1.6/teams/search?team_type=highSchool&name=' + keyword )
             .then(
                     function(results) { 
                         
@@ -102,11 +111,25 @@ angular.module('adminAppApp')
                 
                 $('#myModal').modal('show');
                 
-                console.log(res.data.response_data.team_id);
-                
                 $scope.team_id = res.data.response_data.team_id;
-
+            }else{
                 
+                var bandera = false;
+                
+                for(var i = 0; i < $scope.listTeams.length; i++){
+                    if($scope.listTeams[i].name == res.data.response_data.name){
+                        bandera = true;
+                    }   
+                }
+                
+                
+                if(!bandera){
+                    console.log(res.data.response_data);
+                    $scope.listTeams.push(res.data.response_data);
+                }
+                                
+                console.log($scope.listTeams);
+
             }
             
         }, function(res){
@@ -117,17 +140,39 @@ angular.module('adminAppApp')
     
     $scope.add_user_team = function(){
         
-        var obj_team = {};
-        
-        obj_team.name = $scope.team_name_save;
-        obj_team.username = $scope.user_id_save;
-        obj_team.teamType = $scope.education_save;
-        obj_team.level = JSON.parse($scope.selected_team_save)[0];
-        obj_team.gender = JSON.parse($scope.selected_team_save)[1];
-        obj_team.password = $scope.password_team_save;
+        var obj_team = {},
+            obj_team_push = {};
+        obj_team.username = $scope.name_user_save;
         obj_team.email = $scope.email_team_save;
+        obj_team.password = $scope.password_team_save;
+        
+        var team_id = $scope.team_id;
+        
+        $http.put(
+            $rootScope.baseurl + "/1.6/teams/" + team_id + "/user",
+            obj_team,
+            {
+                headers: {
+                           'Content-Type': "application/json"
+                         }
+            }
+        ).then(function(res){
+            console.log(res);
+            obj_team_push.team_id = res.data.response_data.team_id;
+            obj_team_push.user_id = res.data.response_data.user_id;
+            obj_team_push.name = res.data.response_data.name;
+            obj_team_push.username = res.data.response_data.username;
+            obj_team_push.email = res.data.response_data.email;
+            
+                    
+            $scope.listTeams.push(obj_team_push);
+        },function(res){
+            console.log(res);
+        });
         
         console.log(obj_team);
+
+        
     
     };
     
