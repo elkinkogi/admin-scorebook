@@ -40,32 +40,32 @@
                 </form>
             </div>
             <h4>Or create a new team: </h4>
-            <form ng-submit="add_user_team()">
+            <form ng-submit="add_team()">
                 <div class="row">
                        <div class="col-xs-6">
                             <label for="team_name_save">
                                 Team Name*
                             </label>
-                            <input type="text" ng-model="team_name_add" class="team-name-league" id="team-name-league">
+                            <input type="text" ng-model="team.name" class="team-name-league" id="team-name-league" required>
                         </div>
                         <div class="col-xs-6">
                             <label for="user-id-league">
-                                User ID*
+                                User Name*
                             </label>
-                            <input type="text" ng-model="user_id_add" id="user-id-league">
+                            <input type="text" ng-model="team.username" id="user-id-league" required>
                         </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
-                       <input type="radio" ng-model="education_add" value="highSchool">    
+                       <input type="radio" ng-model="team.teamType" value="highSchool">    
                         <label for="league-name">
                             High School
                         </label>
-                        <input type="radio" ng-model="education_add" value="college"> 
+                        <input type="radio" ng-model="team.teamType" value="college"> 
                         <label for="league-name">
                             College
                         </label>
-                        <select id="selected_team" class="form-control" ng-model="selected_team_add" required>
+                        <select id="selected_team" class="form-control" ng-model="level_gender" required>
                             <option></option>
                             <option value="[2,1]">Junior Varsity boys</option>
                             <option value="[2,2]">Junior Varsity girls</option>
@@ -79,7 +79,7 @@
                         <label for="password-team-league">
                             Password*
                         </label>
-                        <input type="password" autocomplete="off" ng-model="password_team_add" id="password-team-league">
+                        <input type="password" autocomplete="off" ng-model="team.password" id="password-team-league" required>
                     </div>
                 </div>
                 <div class="row">
@@ -89,7 +89,7 @@
                         <label for="email-team-league">
                             Email*
                         </label>
-                        <input type="email" autocomplete="off" ng-model="email_team_add" id="email-team-league">
+                        <input type="email" autocomplete="off" ng-model="team.email" id="email-team-league" required>
                     </div>
                 </div>
                 <div class="row">
@@ -118,7 +118,7 @@
                     </div>
                     <div class="row">
                         <div class="submit-listTeams">
-                            <button type="submit" class="btn btn-default set">Create</button>
+                            <button ng-click="add_teams_to_league()" class="btn btn-default set">Create</button>
                             &ensp;&ensp;
                             <button ng-click="cancel()" class="btn btn-default">Cancel</button>
                         </div>

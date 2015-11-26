@@ -10,6 +10,12 @@
 angular.module('adminAppApp')
   .controller('AddteamsCtrl', function ($scope, $rootScope, $location, $http, $q, $timeout, SessionService) {
 
+    
+    if(!SessionService.get('isLogged')){
+        $location.path('/'); 
+    } 
+    
+    
      $rootScope.headerLeft = true;
      $rootScope.header_text = false
      $rootScope.header = true;
@@ -21,14 +27,13 @@ angular.module('adminAppApp')
      };
     
     $scope.education = "highSchool";
+    var id_league = SessionService.get('league').id;
     
     if(!SessionService.get('isLogged')){
         $location.path('/'); 
     }
     
     if(SessionService.get('league')){
-        
-        var id_league = SessionService.get('league').id;
 
         $http.get(
             $rootScope.baseurl + "/1.6/leagues/" + id_league
@@ -99,11 +104,12 @@ angular.module('adminAppApp')
     $scope.searchTeam = function(){
         
         var searchText = $scope.searchText;
+        var education = $scope.education;
         var level = JSON.parse($scope.selected_team)[0];
         var gender = JSON.parse($scope.selected_team)[1];
         
         $http.get(
-            $rootScope.baseurl + "/1.6/leagues/searchTeam?teamType=highSchool&name=" + searchText + "&level=" + level + "&gender="+ gender + ""
+            $rootScope.baseurl + "/1.6/leagues/searchTeam?teamType=" + education + "&name=" + searchText + "&level=" + level + "&gender="+ gender + ""
         ).then(function(res){
             console.log(res);
             
@@ -166,6 +172,9 @@ angular.module('adminAppApp')
             
                     
             $scope.listTeams.push(obj_team_push);
+            
+            $('#myModal').modal('hide')
+            
         },function(res){
             console.log(res);
         });
@@ -174,6 +183,77 @@ angular.module('adminAppApp')
 
         
     
+    };            
+    
+    $scope.team = {};
+    $scope.team.teamType = "highSchool";
+    
+    $scope.add_team = function(){
+        
+        var objTeam = $scope.team;
+
+        objTeam.level = JSON.parse($scope.level_gender)[0];
+        objTeam.gender = JSON.parse($scope.level_gender)[1];
+
+        console.log(objTeam);
+        
+            $http.post(
+                $rootScope.baseurl + "/1.6/leagues/team",
+                objTeam,
+                {
+                    'Content-type' : 'application/json'
+                }
+            ).then(function(res){
+                    console.log(res);
+                
+                $scope.listTeams.push(res.data.response_data);
+                
+                
+                },function(res){
+                    console.log(res);
+            });
+        
+    };
+    
+    
+    $scope.add_teams_to_league = function(){
+        console.log($scope.listTeams.length);
+        
+                
+        if($scope.listTeams.length != 0){
+            
+            var array_id_teams = [];
+            
+            for(var j = 0; j < $scope.listTeams.length; j++){
+                array_id_teams.push($scope.listTeams[j].team_id);
+            }
+            
+            $http.put(
+
+                $rootScope.baseurl + "/1.6/leagues/" + id_league + "/teams",
+                array_id_teams,
+                {
+                    headers:{
+                        "Content-type" : "application/json"
+                    }
+                }
+
+            ).then(function(res){
+                console.log(res);
+            }, function(res){
+                console.log(res);
+            });
+        }else{
+            
+            bootbox.alert({
+                 size: 'small',
+                 message: "No hay teams a guardar!!!"
+            });
+            
+        }
+
+        
+        
     };
     
 
