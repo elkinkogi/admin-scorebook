@@ -22,7 +22,17 @@ angular.module('adminAppApp')
     
     $scope.education = "highSchool";
     
-        if(!SessionService.get('isLogged')){
+    if(!SessionService.get('isLogged')){
+        $location.path('/'); 
+    }
+    
+    if(SessionService.get('league')){
+        
+        $scope.listTeams = SessionService.get('league').teams;
+        console.log(SessionService.get('league').teams);
+        console.log(SessionService.get('league'));
+        
+    }else{
         $location.path('/'); 
     }
     
@@ -49,6 +59,11 @@ angular.module('adminAppApp')
             }
             
     ];
+    
+    
+    $scope.cancel = function(){
+      $location.path('/listLeague');  
+    };
     
     
     $scope.getTeams = function(keyword) {
@@ -85,7 +100,12 @@ angular.module('adminAppApp')
             
             if(res.data.response_data.user_id == null){
                 
-                add_user_team(119081);
+                $('#myModal').modal('show');
+                
+                console.log(res.data.response_data.team_id);
+                
+                $scope.team_id = res.data.response_data.team_id;
+
                 
             }
             
@@ -95,44 +115,23 @@ angular.module('adminAppApp')
     };
     
     
-    var add_user_team = function(arg){
-    
-        bootbox.confirm({
-            size: "small",
-            message: "Please complete the following information in order to add the team",
-            callback:function(result){
-                
-                iElement.hide();
-                if(result){
-                    
-                    $http.delete(
-                        
-                        $rootScope.baseurl + "/1.6/leagues/" + id_league
-                        
-                    ).then(function(res){
-                        console.log(res);
-                    },function(res){
-                        console.log(res); 
-                    });
-                    
-                }
-                
-            },
-            buttons:{
-                cancel:{
-                    label:'Cancel'
-                },
-                confirm:{
-                    label:'Delete'
-                }
-            }
-        });
+    $scope.add_user_team = function(){
+        
+        var obj_team = {};
+        
+        obj_team.name = $scope.team_name_save;
+        obj_team.username = $scope.user_id_save;
+        obj_team.teamType = $scope.education_save;
+        obj_team.level = JSON.parse($scope.selected_team_save)[0];
+        obj_team.gender = JSON.parse($scope.selected_team_save)[1];
+        obj_team.password = $scope.password_team_save;
+        obj_team.email = $scope.email_team_save;
+        
+        console.log(obj_team);
     
     };
     
-    
-    
-    $scope.listTeams = dataJSON;
+
     
     
   });

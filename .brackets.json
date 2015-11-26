@@ -1,5 +1,6 @@
 {
     "jscodehints.detectedExclusions": [
-        "C:/Users/Elkin/Desktop/project/admin-scorebook/bower_components/jquery/src/dimensions.js"
+        "C:/Users/Elkin/Desktop/project/admin-scorebook/bower_components/jquery/src/dimensions.js",
+        "C:/Users/Elkin/Desktop/project/admin-scorebook/bower_components/jquery/src/attributes.js"
     ]
 }

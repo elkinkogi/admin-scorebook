@@ -39,34 +39,57 @@
 
                 </form>
             </div>
-            <form>
+            <h4>Or create a new team: </h4>
+            <form ng-submit="add_user_team()">
                 <div class="row">
-                  <h4>Or create a new team: </h4>
                        <div class="col-xs-6">
-                            <label for="team-name-league">
+                            <label for="team_name_save">
                                 Team Name*
                             </label>
-                            <input type="text" name="team-name-league" class="team-name-league" id="team-name-league">
+                            <input type="text" ng-model="team_name_save" class="team-name-league" id="team-name-league">
                         </div>
                         <div class="col-xs-6">
                             <label for="user-id-league">
                                 User ID*
                             </label>
-                            <input type="text" name="user-id-league" class="user-id-league" id="user-id-league">
+                            <input type="text" ng-model="user_id_save" id="user-id-league">
                         </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
-                        <label for="email-team-league">
-                            Email*
+                       <input type="radio" ng-model="education_save" value="highSchool">    
+                        <label for="league-name">
+                            High School
                         </label>
-                        <input type="email" autocomplete="off" name="email-team-league" id="email-team-league">
+                        <input type="radio" ng-model="education_save" value="college"> 
+                        <label for="league-name">
+                            College
+                        </label>
+                        <select id="selected_team" class="form-control" ng-model="selected_team_save" required>
+                            <option></option>
+                            <option value="[2,1]">Junior Varsity boys</option>
+                            <option value="[2,2]">Junior Varsity girls</option>
+                            <option value="[1,1]">Varsity boys</option>
+                            <option value="[1,2]">Varsity girls</option>
+                            <option value="[3,1]">Freshman boys</option>
+                            <option value="[3,2]">Freshman girls</option>
+                        </select>
                     </div>
                     <div class="col-xs-6">
                         <label for="password-team-league">
                             Password*
                         </label>
-                        <input type="password" autocomplete="off" name="password-team-league" id="password-team-league">
+                        <input type="password" autocomplete="off" ng-model="password_team_save" id="password-team-league">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                    </div>
+                    <div class="col-xs-6">
+                        <label for="email-team-league">
+                            Email*
+                        </label>
+                        <input type="email" autocomplete="off" ng-model="email_team_save" id="email-team-league">
                     </div>
                 </div>
                 <div class="row">
@@ -76,9 +99,8 @@
                 </div>
             </form>
             <hr/>
-            <form>
-               <div class="row">
-                   <div class="col-xs-12">
+
+                   <div class="row">
                         <table class="list-teams">
                             <tr class="thead">
                                 <th>Team Name</th>
@@ -98,12 +120,45 @@
                         <div class="submit-listTeams">
                             <button type="submit" class="btn btn-default set">Create</button>
                             &ensp;&ensp;
-                            <button type="reset" class="btn btn-default">Cencel</button>
+                            <button ng-click="cancel()" class="btn btn-default">Cancel</button>
                         </div>
                     </div>
-                </div>
-            </form>
+        </div>
+        
+        <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                      <div class="row content-create">
+            <div class="row">
+               <form ng-submit="add_user_team()" class="add_team">
+                    <div class="col-xs-12">
+                        <label for="user-id-league">
+                            User ID*
+                        </label>
+                        <input type="text" ng-model="id_user_save">
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="email-league">
+                            Email
+                        </label>
+                        <input type="text" ng-model="email_user_save">
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="user-id-league">
+                            Password
+                        </label>
+                        <input type="password" ng-model="password_user_save">
+                    </div>
+                    <div class="col-xs-12">
+                        <input type="hidden" ng-model="team_id">
+                        <button class="btn btn-default set" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
             
+        </div>
+            </div>
+          </div>
         </div>
 
 

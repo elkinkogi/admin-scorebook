@@ -431,7 +431,7 @@ angular.module('adminAppApp')
                     }).then(function successCallback(res){
                         console.log(res);
                         SessionService.set('league',res.data.response_data);
-                        $location.path('/listleague');
+                        $location.path('/addteams');
                     },function errorCallback(res){
                         console.log(res); 
                     });
@@ -445,7 +445,7 @@ angular.module('adminAppApp')
                     ).then(function successCallback(res){
                         console.log(res);
                         SessionService.set('league',res.data.response_data);
-                        $location.path('/listleague');
+                        $location.path('/addteams');
                     },function errorCallback(res){
                         console.log(res); 
                     });
