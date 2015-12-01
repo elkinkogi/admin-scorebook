@@ -35,8 +35,20 @@ angular.module('adminAppApp')
     $http.get(
             $rootScope.baseurl + "/1.6/leagues"
         ).then(function successCallback(res){
-                $scope.listLeagues = res.data.response_data;
-                console.log(res.data.response_data);
+                
+        
+                if(res.data.response_code === 1){
+                    
+                   $scope.listLeagues = res.data.response_data;
+                    console.log(res); 
+                    
+                }else{
+                    
+                    alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+                    
+                }
+        
+        
         },function errorCallback(res){
             console.log(res);
     });

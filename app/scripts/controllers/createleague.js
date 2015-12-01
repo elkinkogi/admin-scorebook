@@ -235,21 +235,41 @@ angular.module('adminAppApp')
     
     
     if(SessionService.get('isLogged')){
-        $http({
-            method: "GET",
-            url: $rootScope.baseurl + "/1.6/leagues/types"
-        }).success(function(data){
-            console.log(data.response_data);
-            $scope.type_league = data.response_data;
-        }); 
-        
-        $http({
-            method: "GET",
-            url: $rootScope.baseurl + "/1.6/leagues/seasons"
-        }).success(function(data){
-            console.log(data.response_data);
-            $scope.season_league = data.response_data;
+        $http.get(
+            $rootScope.baseurl + "/1.6/leagues/types"
+        ).then(function(res){
+            
+            if(res.data.response_code === 1){
+                
+                console.log(res);
+                $scope.type_league = res.data.response_data;
+                 
+             }else{
+                 alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+             }
+            
+        },function(res){
+             alert(res);
         });
+            
+        
+        $http.get(
+            $rootScope.baseurl + "/1.6/leagues/seasons"
+        ).then(function(res){
+            
+            if(res.data.response_code === 1){
+                
+                console.log(res.data.response_data);
+                $scope.season_league = res.data.response_data;
+                 
+             }else{
+                 alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+             }
+            
+        },function(res){
+            alert(res);
+        })
+
     }
     
      if(SessionService.get('league')){
@@ -433,8 +453,20 @@ angular.module('adminAppApp')
                          data: dataLeague
                     }).then(function successCallback(res){
                         console.log(res);
-                        SessionService.set('league',res.data.response_data);
-                        $location.path('/addteams');
+                        
+                        
+                        if(res.data.response_code === 1){
+                            
+                            SessionService.set('league',res.data.response_data);
+                            $location.path('/addteams');
+                            
+                            
+                        }else{
+                            alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+                        }
+                        
+                        
+                        
                     },function errorCallback(res){
                         console.log(res); 
                     });
@@ -447,8 +479,18 @@ angular.module('adminAppApp')
                          }
                     ).then(function successCallback(res){
                         console.log(res);
-                        SessionService.set('league',res.data.response_data);
-                        $location.path('/addteams');
+                         
+                         if(res.data.response_code === 1){
+                            
+                            SessionService.set('league',res.data.response_data);
+                            $location.path('/addteams');
+      
+                        }else{
+                            alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+                        }
+                         
+                         
+                         
                     },function errorCallback(res){
                         console.log(res); 
                     });
@@ -462,8 +504,8 @@ angular.module('adminAppApp')
         $('#datetimepicker4').datetimepicker({
             viewMode: 'years',
             format: 'YYYY',
-            minDate: '1901',
-            maxDate: '2016'
+            minDate: moment([1900]),
+            maxDate: moment([2015])
         });
     });
     
