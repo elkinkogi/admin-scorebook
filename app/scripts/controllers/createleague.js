@@ -256,13 +256,10 @@ angular.module('adminAppApp')
          
         $('.btn-create').html('Update');
                  
-         var options = {
-          year: 'numeric', month: 'numeric', day: 'numeric',
-          hour: 'numeric', minute: 'numeric',
-          hour12: true
-        };
+
          
         var leagueUpdate = SessionService.get('league');
+         console.log(leagueUpdate);
 
         $scope.name = leagueUpdate.name;
         $scope.city = leagueUpdate.city;
@@ -277,7 +274,7 @@ angular.module('adminAppApp')
         $('#box-color-2').css("background", leagueUpdate.color_2);
         $('#box-color-1-span').html(leagueUpdate.color_1);
         $('#box-color-2-span').html(leagueUpdate.color_2);
-        $scope.founded_date = new Date(leagueUpdate.founded_date).toLocaleString('en-US',options);
+        $scope.founded_date = leagueUpdate.founded_date.substr(0,4);
         $scope.coordinator = leagueUpdate.coordinator_name;
         $scope.email = leagueUpdate.email;
         $scope.title = leagueUpdate.title;
@@ -286,16 +283,22 @@ angular.module('adminAppApp')
         $scope.twitter = leagueUpdate.twitter_account;
         $scope.address = leagueUpdate.office_address;
          
-         console.log(new Date(leagueUpdate.founded_date).toLocaleString('en-US',options));
+         console.log(leagueUpdate.founded_date.substr(0,4));
          
      }else{
          $('.btn-create').html('Create');
      }
+    
+    
+        
+    $scope.cancel_league = function(){
+      
+        $location.path("/");
+        
+    };
 
     
     $scope.create = function(){
-        
-        console.log(new Date($('#datetimepicker4').val()).toISOString);
     
         if(!SessionService.get('league')){
 
@@ -410,7 +413,7 @@ angular.module('adminAppApp')
                 dataLeague.photo = arg.photo;
                 dataLeague.color_1 = $("#box-color-1-span").html();
                 dataLeague.color_2 = $("#box-color-2-span").html();
-                dataLeague.founded_date = new Date($('#datetimepicker4').val()).toISOString();
+                dataLeague.founded_date = $('#datetimepicker4').val();
                 dataLeague.coordinator_name = $scope.coordinator;
                 dataLeague.email = $scope.email;
                 dataLeague.title = $scope.title;
@@ -453,8 +456,15 @@ angular.module('adminAppApp')
                 
         };
     
+    
+    
     $(function () {
-        $('#datetimepicker4').datetimepicker();
+        $('#datetimepicker4').datetimepicker({
+            viewMode: 'years',
+            format: 'YYYY',
+            minDate: '1901',
+            maxDate: '2016'
+        });
     });
     
     

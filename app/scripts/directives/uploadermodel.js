@@ -65,3 +65,18 @@ angular.module('adminAppApp')
         }
     };
   });
+
+angular.module('adminAppApp')
+  .directive('removeTeam', function ($http,$rootScope) {
+    return {
+      link: function (scope, iElement, iAttrs) {
+          
+              scope.removeteam = function(){
+                  
+                iElement.hide();
+
+              }
+          }
+    };
+  })
+

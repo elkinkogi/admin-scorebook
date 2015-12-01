@@ -27,10 +27,12 @@ angular.module('adminAppApp')
      };
     
     $scope.education = "highSchool";
-    var id_league = SessionService.get('league').id;
+    var id_league;
     
-    if(!SessionService.get('isLogged')){
+    if(!SessionService.get('league')){
         $location.path('/'); 
+    }else{
+        id_league = SessionService.get('league').id;
     }
     
     if(SessionService.get('league')){
@@ -75,7 +77,7 @@ angular.module('adminAppApp')
     ];
     
     
-    $scope.cancel = function(){
+    $scope.cancel_addteam = function(){
       $location.path('/listLeague');  
     };
     
@@ -154,6 +156,8 @@ angular.module('adminAppApp')
         
         var team_id = $scope.team_id;
         
+        //console.log($scope.team_id);
+        
         $http.put(
             $rootScope.baseurl + "/1.6/teams/" + team_id + "/user",
             obj_team,
@@ -164,16 +168,27 @@ angular.module('adminAppApp')
             }
         ).then(function(res){
             console.log(res);
-            obj_team_push.team_id = res.data.response_data.team_id;
-            obj_team_push.user_id = res.data.response_data.user_id;
-            obj_team_push.name = res.data.response_data.name;
-            obj_team_push.username = res.data.response_data.username;
-            obj_team_push.email = res.data.response_data.email;
+            if(res.data.response_code === 2){
+                alert(res.data.response_text);
+            }else if(res.data.response_code === 3){
+                alert(res.data.response_text);
+            }else{
+                
+                obj_team_push.team_id = res.data.response_data.team_id;
+                obj_team_push.user_id = res.data.response_data.user_id;
+                obj_team_push.name = res.data.response_data.name;
+                obj_team_push.username = res.data.response_data.username;
+                obj_team_push.email = res.data.response_data.email;
+
+
+                $scope.listTeams.push(obj_team_push);
+                $('#myModal').modal('hide');
+                
+                
+            }
             
-                    
-            $scope.listTeams.push(obj_team_push);
             
-            $('#myModal').modal('hide')
+            
             
         },function(res){
             console.log(res);
@@ -215,13 +230,27 @@ angular.module('adminAppApp')
         
     };
     
+    $scope.removeteam2 = function(key){
+        
+        $scope.listTeams.splice(key,1);
+
+        console.log($scope.listTeams);
+        
+        
+    }
+    
     
     $scope.add_teams_to_league = function(){
-        console.log($scope.listTeams.length);
+        //console.log($scope.listTeams.length);
         
                 
-        if($scope.listTeams.length != 0){
-            
+            if(typeof $scope.listTeams === "undefined"){
+
+                $scope.listTeams = []; 
+
+                alert('e');
+            }
+        
             var array_id_teams = [];
             
             for(var j = 0; j < $scope.listTeams.length; j++){
@@ -230,27 +259,21 @@ angular.module('adminAppApp')
             
             $http.put(
 
-                $rootScope.baseurl + "/1.6/leagues/" + id_league + "/teams",
-                array_id_teams,
-                {
-                    headers:{
-                        "Content-type" : "application/json"
-                    }
+            $rootScope.baseurl + "/1.6/leagues/" + id_league + "/teams",
+            array_id_teams,
+            {
+                headers:{
+                    "Content-type" : "application/json"
                 }
+            }
 
             ).then(function(res){
                 console.log(res);
+                $location.path('/listLeague');
             }, function(res){
                 console.log(res);
             });
-        }else{
-            
-            bootbox.alert({
-                 size: 'small',
-                 message: "No hay teams a guardar!!!"
-            });
-            
-        }
+
 
         
         

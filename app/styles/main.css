@@ -219,6 +219,7 @@ th, td {
 .btn-default{
     width: 150px;
     margin: auto;
+    text-align: center;
 }
 
 .set{

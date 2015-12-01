@@ -13,6 +13,7 @@
                         Type of League*
                     </label>
                     <select class="form-control" required ng-model="type">
+                       <option></option>
                         <option value="{{ value.id }}" ng-repeat="value in type_league">{{ value.name }}</option>
                     </select>
                 </div>
@@ -25,6 +26,7 @@
                     <div class="cont-location">
                         <input type="text" name="location-league" ng-model="city" class="location-league" id="location-league" required>
                         <select class="form-control state" ng-model="state" required>
+                           <option></option>
                             <option value="{{ value.name }}" ng-repeat="value in stateList">{{ value.abrr }}</option>
                         </select>
                     </div>
@@ -103,6 +105,7 @@
                         Season*
                     </label>
                     <select class="form-control" required ng-model="season">
+                        <option></option>
                         <option value="{{ value }}" ng-repeat="value in season_league">{{ value }}</option>
                     </select>
                 </div>
@@ -159,8 +162,8 @@
         </div>
         <div class="row">
             <div class="col-xs-12 submit-league">
-                <button type="submit" class="btn-create" class="btn btn-default set">Create</button>
-                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                <button type="submit" class="btn-create btn btn-default set" >Create</button>
+                <div ng-click="cancel_league()" class="btn btn-default">Cancel</div>
             </div>
         </div>
     </form>
