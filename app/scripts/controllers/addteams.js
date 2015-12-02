@@ -125,7 +125,7 @@ angular.module('adminAppApp')
                 var bandera = false;
                 
                 for(var i = 0; i < $scope.listTeams.length; i++){
-                    if($scope.listTeams[i].name == res.data.response_data.name){
+                    if($scope.listTeams[i].team_id == res.data.response_data.team_id){
                         bandera = true;
                     }   
                 }
@@ -248,7 +248,6 @@ angular.module('adminAppApp')
 
                 $scope.listTeams = []; 
 
-                alert('e');
             }
         
             var array_id_teams = [];
