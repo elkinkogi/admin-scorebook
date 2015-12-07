@@ -212,8 +212,6 @@ th, td {
 .btn-primary{
     background-color: gray !important;
     border-color: gray !important;
-    height: 50px;
-    line-height: 35px;
 }
 
 .btn-default{

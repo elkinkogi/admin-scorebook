@@ -25,16 +25,13 @@ angular.module('adminAppApp')
     return {
       link: function (scope, iElement, iAttrs) {
           
-          scope.remove = function(id_league){
+          scope.remove = function(id_league, name_league){
               
         bootbox.confirm({
-            size: "small",
-            message: "Are you sure you want to \n delete League name 2?",
+            message: "Are you sure you want to delete League " + name_league + "?",
             callback:function(result){
-                
-                iElement.hide();
                 if(result){
-                    
+                    iElement.hide();
                     $http.delete(
                         
                         $rootScope.baseurl + "/1.6/leagues/" + id_league

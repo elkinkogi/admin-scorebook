@@ -25,11 +25,6 @@ angular.module('adminAppApp')
      };
     
     
-    
-
-    
-    
-    
     var state = [
         {
             "name": "Alabama", 
@@ -245,7 +240,7 @@ angular.module('adminAppApp')
                 $scope.type_league = res.data.response_data;
                  
              }else{
-                 alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+                 alert(res.data.response_code + ": " + res.data.response_text);
              }
             
         },function(res){
@@ -263,7 +258,7 @@ angular.module('adminAppApp')
                 $scope.season_league = res.data.response_data;
                  
              }else{
-                 alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+                 alert(res.data.response_code + ": " + res.data.response_text);
              }
             
         },function(res){
@@ -462,7 +457,7 @@ angular.module('adminAppApp')
                             
                             
                         }else{
-                            alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+                            alert(res.data.response_code + ": " + res.data.response_text);
                         }
                         
                         
@@ -486,7 +481,7 @@ angular.module('adminAppApp')
                             $location.path('/addteams');
       
                         }else{
-                            alert("response_code: " + res.data.response_code + "response_text: " + res.data.response_text);
+                            alert(res.data.response_code + ": " + res.data.response_text);
                         }
                          
                          

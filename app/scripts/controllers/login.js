@@ -44,7 +44,7 @@ angular.module('adminAppApp')
             $location.path('/listLeague');
         }
         
-        if(data_login.email == "jeffb@scorebooklive.com" && data_login.password == "jeff123"){
+        if(data_login.email == "jeffb@scorebooklive.com" && data_login.password == "jeffb123"){
             SessionService.set('isLogged', true, true);
             
             $location.path('/listLeague');

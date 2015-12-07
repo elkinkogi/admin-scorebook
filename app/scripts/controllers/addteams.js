@@ -201,13 +201,15 @@ angular.module('adminAppApp')
     };            
     
     $scope.team = {};
+    
+    
     $scope.team.teamType = "highSchool";
     
     $scope.add_team = function(){
         
         var objTeam = $scope.team;
 
-        objTeam.level = JSON.parse($scope.level_gender)[0];
+        objTeam.level  = JSON.parse($scope.level_gender)[0];
         objTeam.gender = JSON.parse($scope.level_gender)[1];
 
         console.log(objTeam);
@@ -219,11 +221,16 @@ angular.module('adminAppApp')
                     'Content-type' : 'application/json'
                 }
             ).then(function(res){
+                    
+                console.log(res);
+                
+                if(res.data.response_code === 1){    
                     console.log(res);
-                
-                $scope.listTeams.push(res.data.response_data);
-                
-                
+                    $scope.listTeams.push(res.data.response_data);
+                }else{
+                    alert(res.data.response_code + ": " + res.data.response_text);
+                }
+
                 },function(res){
                     console.log(res);
             });
