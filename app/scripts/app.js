@@ -68,7 +68,7 @@ angular
     }
     
             $rootScope.header = false;
-            $rootScope.baseurl = "http://52.8.61.197/api";
+            $rootScope.baseurl = "http://scorebooklive.com/api";
             
 
 });

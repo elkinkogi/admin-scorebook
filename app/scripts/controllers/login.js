@@ -60,9 +60,11 @@ angular.module('adminAppApp')
             SessionService.set('isLogged', true, true);
             
             $location.path('/listLeague');
+        }else{
+            alert('User or Password incorrect')
         }
         
-        console.log(data_login);
+      
         
     };
   });
