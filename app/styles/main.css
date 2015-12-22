@@ -43,7 +43,7 @@ input{
 }
 
 input[type="radio"]{
-    width: 4% !important;
+    width: 3% !important;
 }
 
 .container{
@@ -253,6 +253,11 @@ th, td {
 .radio-addteams{
     display: flex;
     align-items: center;
+    width: 20% !important;
+}
+
+.searchBox{
+    width: 46% !important;
 }
 
 .form-teams{
@@ -276,6 +281,14 @@ th, td {
     width: 80%;
     margin: auto;
     
+}
+
+.type-team{
+    width: 100%;
+}
+
+input.education{
+    width: 16px !important;
 }
 
 

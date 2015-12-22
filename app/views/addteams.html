@@ -3,15 +3,17 @@
         <div class="row content-create">
             <div class="row">
                <form ng-submit="searchTeam()" class="add_team">
-                    <div class="col-xs-6 radio-addteams">
-                        <input type="radio" ng-model="education" value="highSchool">    
+                    <div class="col-xs-3 radio-addteams">
+                        <input type="radio" ng-model="education" value="highSchool" class="education">    
                         <label for="league-name">
                             High School
                         </label>
-                        <input type="radio" ng-model="education" value="college"> 
+                        <input type="radio" ng-model="education" value="college" class="education"> 
                         <label for="league-name">
                             College
                         </label>
+                    </div>
+                    <div class="col-xs-5 searchBox">
                         <md-autocomplete
                            required
                             md-selected-item="selectedItem" 
@@ -24,7 +26,7 @@
                             <span md-highlight-text="searchText">{{ item }}</span>
                         </md-autocomplete>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-4">
                         <select id="selected_team" class="form-control" ng-model="selected_team" required>
                             <option></option>
                             <option value="[2,1]">Junior Varsity boys</option>

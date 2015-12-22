@@ -68,7 +68,7 @@ angular
     }
     
             $rootScope.header = false;
-            $rootScope.baseurl = "http://scorebooklive.com/api";
+            $rootScope.baseurl = "http://scorebooklive.kogimobile.com/api";
             
 
 });
